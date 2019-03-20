@@ -6,13 +6,13 @@ jobs:
     SourceLinkEnabled: false
 
   steps:
-  - task: GitVersion@3
+  - task: GitVersion@4
     inputs:
       updateAssemblyInfo: false   
       
   - task: NuGetToolInstaller@0
     inputs:
-        versionSpec: 4.7.0
+        versionSpec: 4.9.1
         checkLatest: false
 
   - task: MSBuild@1
