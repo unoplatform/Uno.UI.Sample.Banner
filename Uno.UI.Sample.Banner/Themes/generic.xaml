@@ -79,6 +79,25 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style x:Key="Banner_BasicEmptyToggleButtonStyle"
+		   TargetType="ToggleButton">
+
+        <Setter Property="Background"
+				Value="{StaticResource TransparentColorBrush}" />
+        <Setter Property="BorderThickness"
+				Value="0" />
+        <Setter Property="Padding"
+				Value="0" />
+        <Setter Property="HorizontalAlignment"
+				Value="Stretch" />
+        <Setter Property="VerticalAlignment"
+				Value="Stretch" />
+        <Setter Property="VerticalContentAlignment"
+				Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment"
+				Value="Stretch" />
+
+    </Style>
 
     <!-- Primary Button Style -->
     <Style x:Key="Banner_PrimaryButtonStyle"
@@ -310,7 +329,7 @@
 											Grid.Column="2">
 
                                     <!-- About Button -->
-                                    <Button x:Name="openAboutButton"
+                                    <Button x:Name="aboutButton"
 											Style="{StaticResource Banner_BasicEmptyButtonStyle}"
 											Click="OnAbout">
                                         <TextBlock Text="i"
@@ -318,6 +337,132 @@
 												   FontSize="28"
 												   FontWeight="Bold" 
 												   Margin="0,0,0,4"/>
+                                        <Button.Flyout>
+                                            <Flyout Placement="Right" x:Name="aboutPopup">
+                                                <!-- Popup -->
+                                                <Grid Background="{StaticResource Banner_Color01Brush}"
+									                  CornerRadius="4"
+									                  MaxWidth="380"
+									                  HorizontalAlignment="Center"
+									                  VerticalAlignment="Top">
+
+                                                    <!-- Close Button -->
+                                                    <Button x:Name="closeAboutButton"
+                                                            Style="{StaticResource Banner_BasicEmptyButtonStyle}"
+                                                            Click="OnCloseAbout"
+                                                            VerticalAlignment="Top"
+                                                            HorizontalAlignment="Right"
+                                                            Padding="0">
+
+                                                        <!-- Icon -->
+                                                        <Path Data="M14 1.41 12.59 0 7 5.59 1.41 0 0 1.41 5.59 7 0 12.59 1.41 14 7 8.41 12.59 14 14 12.59 8.41 7"
+                                                              Fill="{StaticResource Banner_Color02Brush}"
+                                                              Stretch="Uniform"
+                                                              Height="14"
+                                                              Width="14"
+                                                              Margin="16" />
+                                                    </Button>
+
+                                                    <StackPanel Margin="40,40,40,65">
+
+                                                        <!-- Header -->
+                                                        <TextBlock TextWrapping="Wrap"
+												   Foreground="{StaticResource Banner_Color03Brush}"
+												   FontWeight="Bold"
+												   FontSize="24">
+					
+											Welcome to
+											
+											<!-- Link to Original Fork -->
+											<Hyperlink NavigateUri="{TemplateBinding LinkToUnoPlatformApp}"
+													   Foreground="{StaticResource Banner_Color02Brush}">
+												<Underline>
+													<Run Text="{TemplateBinding AppName}" />
+												</Underline>
+											</Hyperlink> 
+					
+											by
+											
+											<!-- Link to Uno Fork -->
+											<Hyperlink NavigateUri="{TemplateBinding LinkToOriginalApp}"
+													   Foreground="{StaticResource Banner_Color02Brush}">
+												<Underline>
+													<Run Text="{TemplateBinding AppAuthor}" />
+												</Underline>
+											</Hyperlink> 
+					
+											running on WebAssembly
+                                                        </TextBlock>
+
+                                                        <!-- About Content -->
+                                                        <ContentPresenter x:Name="AboutContent"
+                                                          Foreground="{StaticResource Banner_Color02Brush}"
+														  Content="{TemplateBinding AboutContent}"
+														  Margin="0,24,0,0" />
+
+                                                        <!-- Interpreter Warning Content -->
+                                                        <TextBlock Visibility="{TemplateBinding InterpreterModeWarningVisibility}" 
+												   TextWrapping="Wrap"
+												   Foreground="{StaticResource Banner_Color02Brush}"
+												   FontStyle="Italic"
+												   FontSize="12"
+												   Margin="0,16,0,0">
+					
+											The Mono runtime is using the interpreted mode (which is currently about 
+					
+											<!-- Link to WASM Benchmark -->
+											<Hyperlink NavigateUri="https://github.com/stefan-schweiger/dotWasmBenchmark"
+																	Foreground="{StaticResource Banner_Color02Brush}">
+												<Bold>
+													<Underline>
+														50x slower than it should be
+													</Underline>
+												</Bold>
+											</Hyperlink>
+											). For a better experience run it in Microsoft Edge or Mozilla Firefox.
+                                                        </TextBlock>
+
+                                                        <!-- Version -->
+                                                        <TextBlock Text="{TemplateBinding VersionNumber}"
+												   Foreground="{StaticResource Banner_Color02Brush}"
+												   FontSize="12"
+												   Margin="0,16,0,0">
+
+                                                        </TextBlock>
+                                                    </StackPanel>
+
+                                                    <!-- Uno website Button -->
+                                                    <Button x:Name="visitUnoWebsiteButton"
+											Style="{StaticResource Banner_BasicEmptyButtonStyle}"
+											Click="OnVisitUnoPlatformWebsite"
+											VerticalAlignment="Bottom"
+											HorizontalAlignment="Right"
+											Margin="0,0,16,26"
+											Padding="0">
+
+                                                        <StackPanel Orientation="Horizontal"
+													Margin="16">
+
+                                                            <!-- Label -->
+                                                            <TextBlock Text="VISIT THE UNO PLATFORM WEBSITE"
+													   Foreground="{StaticResource Banner_Color02Brush}"
+													   FontWeight="SemiBold"
+													   FontSize="14" />
+
+                                                            <!-- Icon -->
+                                                            <Path Data="M0.5632 1.3568 5.6064 6.4 0.5632 11.4432 1.92 12.8 8 6.4 1.92 0"
+												  Fill="{StaticResource Banner_Color02Brush}"
+												  Stretch="Uniform"
+												  Height="14"
+												  Width="14"
+												  VerticalAlignment="Center"
+												  Margin="8,1,0,0" />
+                                                        </StackPanel>
+                                                    </Button>
+                                                </Grid>
+                                            </Flyout>
+
+                                        </Button.Flyout>
                                     </Button>
 
                                     <!-- GitHub Button -->
@@ -352,138 +497,10 @@
 											  Grid.Row="1" />
 
                             <!-- About Popup -->
-                            <Grid Visibility="{TemplateBinding AboutVisibility}"
-								  Grid.Row="0"
-								  Grid.RowSpan="2">
+                            <Popup IsOpen="{Binding IsChecked, ElementName=aboutButton}" IsLightDismissEnabled="True">
 
-                                <!-- Soft Dismiss Button -->
-                                <Button x:Name="softDismissAboutButton"
-										Style="{StaticResource Banner_BasicEmptyButtonStyle}"
-										Click="OnCloseAbout" />
 
-                                <!-- Popup -->
-                                <Grid Background="{StaticResource Banner_Color01Brush}"
-									  CornerRadius="4"
-									  MaxWidth="580"
-									  HorizontalAlignment="Center"
-									  VerticalAlignment="Top"
-									  Margin="16,170,16,0">
-
-                                    <!-- Close Button -->
-                                    <Button x:Name="closeAboutButton"
-											Style="{StaticResource Banner_BasicEmptyButtonStyle}"
-											Click="OnCloseAbout"
-											VerticalAlignment="Top"
-											HorizontalAlignment="Right"
-											Padding="0">
-
-                                        <!-- Icon -->
-                                        <Path Data="M14 1.41 12.59 0 7 5.59 1.41 0 0 1.41 5.59 7 0 12.59 1.41 14 7 8.41 12.59 14 14 12.59 8.41 7"
-											  Fill="{StaticResource Banner_Color02Brush}"
-											  Stretch="Uniform"
-											  Height="14"
-											  Width="14"
-											  Margin="16" />
-                                    </Button>
-
-                                    <StackPanel Margin="40,40,40,65">
-
-                                        <!-- Header -->
-                                        <TextBlock TextWrapping="Wrap"
-												   Foreground="{StaticResource Banner_Color03Brush}"
-												   FontWeight="Bold"
-												   FontSize="24">
-					
-											Welcome to
-											
-											<!-- Link to Original Fork -->
-											<Hyperlink NavigateUri="{TemplateBinding LinkToUnoPlatformApp}"
-													   Foreground="{StaticResource Banner_Color02Brush}">
-												<Underline>
-													<Run Text="{TemplateBinding AppName}" />
-												</Underline>
-											</Hyperlink> 
-					
-											by
-											
-											<!-- Link to Uno Fork -->
-											<Hyperlink NavigateUri="{TemplateBinding LinkToOriginalApp}"
-													   Foreground="{StaticResource Banner_Color02Brush}">
-												<Underline>
-													<Run Text="{TemplateBinding AppAuthor}" />
-												</Underline>
-											</Hyperlink> 
-					
-											running on WebAssembly
-                                        </TextBlock>
-
-                                        <!-- About Content -->
-                                        <ContentPresenter x:Name="AboutContent"
-                                                          Foreground="{StaticResource Banner_Color02Brush}"
-														  Content="{TemplateBinding AboutContent}"
-														  Margin="0,24,0,0" />
-
-                                        <!-- Interpreter Warning Content -->
-                                        <TextBlock Visibility="{TemplateBinding InterpreterModeWarningVisibility}" 
-												   TextWrapping="Wrap"
-												   Foreground="{StaticResource Banner_Color02Brush}"
-												   FontStyle="Italic"
-												   FontSize="12"
-												   Margin="0,16,0,0">
-					
-											The Mono runtime is using the interpreted mode (which is currently about 
-					
-											<!-- Link to WASM Benchmark -->
-											<Hyperlink NavigateUri="https://github.com/stefan-schweiger/dotWasmBenchmark"
-																	Foreground="{StaticResource Banner_Color02Brush}">
-												<Bold>
-													<Underline>
-														50x slower than it should be
-													</Underline>
-												</Bold>
-											</Hyperlink>
-											). For a better experience run it in Microsoft Edge or Mozilla Firefox.
-                                        </TextBlock>
-
-                                        <!-- Version -->
-                                        <TextBlock Text="{TemplateBinding VersionNumber}"
-												   Foreground="{StaticResource Banner_Color02Brush}"
-												   FontSize="12"
-												   Margin="0,16,0,0">
-
-                                        </TextBlock>
-                                    </StackPanel>
-
-                                    <!-- Uno website Button -->
-                                    <Button x:Name="visitUnoWebsiteButton"
-											Style="{StaticResource Banner_BasicEmptyButtonStyle}"
-											Click="OnVisitUnoPlatformWebsite"
-											VerticalAlignment="Bottom"
-											HorizontalAlignment="Right"
-											Margin="0,0,16,26"
-											Padding="0">
-
-                                        <StackPanel Orientation="Horizontal"
-													Margin="16">
-
-                                            <!-- Label -->
-                                            <TextBlock Text="VISIT THE UNO PLATFORM WEBSITE"
-													   Foreground="{StaticResource Banner_Color02Brush}"
-													   FontWeight="SemiBold"
-													   FontSize="14" />
-
-                                            <!-- Icon -->
-                                            <Path Data="M0.5632 1.3568 5.6064 6.4 0.5632 11.4432 1.92 12.8 8 6.4 1.92 0"
-												  Fill="{StaticResource Banner_Color02Brush}"
-												  Stretch="Uniform"
-												  Height="14"
-												  Width="14"
-												  VerticalAlignment="Center"
-												  Margin="8,1,0,0" />
-                                        </StackPanel>
-                                    </Button>
-                                </Grid>
-                            </Grid>
+                            </Popup>
                         </Grid>
                     </Grid>
                 </ControlTemplate>
@@ -491,4 +508,3 @@
         </Setter>
     </Style>
 </ResourceDictionary>
-    
