@@ -1,0 +1,21 @@
+﻿<Page
+    x:Class="Uno.UI.Sample.Banner.App.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:banner="using:Uno.UI.Sample.Banner"
+    mc:Ignorable="d">
+
+    <banner:BannerControl
+        AppName="Sample Banner App"
+        AppAuthor="Somebody, somewhere"
+        LinkToOriginalApp="https://www.google.com/search?q=original+app"
+        LinkToAppAuthor="https://www.google.com/search?q=original+app+author"
+        LinkToUnoPlatformApp="https://www.google.com/search?q=uno+app+fork+on+github"
+        AboutContent="This is the about content...">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <TextBlock Text="Hello, world !" Margin="20" FontSize="30" />
+        </Grid>
+    </banner:BannerControl>
+</Page>
