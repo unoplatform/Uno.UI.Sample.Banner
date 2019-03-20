@@ -27,19 +27,10 @@ namespace Uno.UI.Sample.Banner
 
 			// LinkToAppAuthor is not used!
 
-			if (GetTemplateChild("openAboutButton") is Button openAboutButton)
+			if(GetTemplateChild("closeAboutButton") is Button closeAboutButton
+				&& GetTemplateChild("aboutPopup") is Flyout aboutPopup)
 			{
-				openAboutButton.Click += (snd, evt) => AboutVisibility = Visibility.Visible;
-			}
-
-			if (GetTemplateChild("closeAboutButton") is Button closeAboutButton)
-			{
-				closeAboutButton.Click += (snd, evt) => AboutVisibility = Visibility.Collapsed;
-			}
-
-			if (GetTemplateChild("softDismissAboutButton") is Button softDismissAboutButton)
-			{
-				softDismissAboutButton.Click += (snd, evt) => AboutVisibility = Visibility.Collapsed;
+				closeAboutButton.Tapped += (snd, evt) => aboutPopup.Hide();
 			}
 		}
 
@@ -53,7 +44,7 @@ namespace Uno.UI.Sample.Banner
 				}
 				else
 				{
-					button.Click += async (snd, evt) => await Windows.System.Launcher.LaunchUriAsync(new Uri(url));
+					button.Tapped += (snd, evt) => Windows.System.Launcher.LaunchUriAsync(new Uri(url));
 				}
 			}
 		}
@@ -87,8 +78,6 @@ namespace Uno.UI.Sample.Banner
 			DependencyProperty.Register("AboutContent", typeof(object), typeof(BannerControl), new PropertyMetadata(null));
 		public static readonly DependencyProperty AppContentProperty =
 			DependencyProperty.Register("AppContent", typeof(object), typeof(BannerControl), new PropertyMetadata(null));
-		public static readonly DependencyProperty AboutVisibilityProperty =
-			DependencyProperty.Register("AboutVisibility", typeof(Visibility), typeof(BannerControl), new PropertyMetadata(Visibility.Collapsed));
 
 		public string AppName
 		{
@@ -154,12 +143,6 @@ namespace Uno.UI.Sample.Banner
 		{
 			get => (object)GetValue(AppContentProperty);
 			set => SetValue(AppContentProperty, value);
-		}
-
-		public Visibility AboutVisibility
-		{
-			get => (Visibility)GetValue(AboutVisibilityProperty);
-			set => SetValue(AboutVisibilityProperty, value);
 		}
 
 		private static void OnAppEnvironmentModeChanged(object d, DependencyPropertyChangedEventArgs e)
