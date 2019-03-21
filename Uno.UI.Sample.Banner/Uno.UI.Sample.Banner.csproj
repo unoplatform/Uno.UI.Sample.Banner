@@ -15,7 +15,7 @@
 		<Product>Uno Banner for Forked Projects</Product>
 		<Description>
 			This package is used to add a standard banner giving information about Uno.
-			Used on forked projects to add Uno as target.
+			Used on projects forked by nventive to add Uno as target.
 		</Description>
 		<PackageIconUrl>https://nv-assets.azurewebsites.net/logos/uno.png</PackageIconUrl>
 		<PackageProjectUrl>https://github.com/nventive/Uno.UI.Sample.Banner</PackageProjectUrl>
