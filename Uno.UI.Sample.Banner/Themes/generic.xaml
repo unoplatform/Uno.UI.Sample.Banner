@@ -377,7 +377,7 @@
 											<Hyperlink NavigateUri="{TemplateBinding LinkToUnoPlatformApp}"
 													   Foreground="{StaticResource Banner_Color02Brush}">
 												<Underline>
-													<Run Text="{TemplateBinding AppName}" />
+													<Run Text="{Binding AppName, RelativeSource={RelativeSource TemplatedParent}}" />
 												</Underline>
 											</Hyperlink> 
 					
@@ -387,7 +387,7 @@
 											<Hyperlink NavigateUri="{TemplateBinding LinkToOriginalApp}"
 													   Foreground="{StaticResource Banner_Color02Brush}">
 												<Underline>
-													<Run Text="{TemplateBinding AppAuthor}" />
+													<Run Text="{Binding AppAuthor, RelativeSource={RelativeSource TemplatedParent}}" />
 												</Underline>
 											</Hyperlink> 
 					
