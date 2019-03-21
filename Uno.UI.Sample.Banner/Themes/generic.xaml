@@ -309,7 +309,7 @@
                                     </StackPanel>
 
                                     <!-- Mode -->
-                                    <Grid Visibility="{TemplateBinding AppEnvironmentModeVisibility}"
+                                    <Grid Visibility="{Binding AppEnvironmentModeVisibility, RelativeSource={RelativeSource TemplatedParent}}"
 										  Background="{StaticResource Banner_Color02Brush}"
 										  HorizontalAlignment="Left"
 										  CornerRadius="8"
@@ -317,7 +317,7 @@
 										  Margin="0,4,0,0">
 
                                         <!-- Value -->
-                                        <TextBlock Text="{TemplateBinding AppEnvironmentMode}"
+                                        <TextBlock Text="{Binding AppEnvironmentMode, RelativeSource={RelativeSource TemplatedParent}}"
 												   Foreground="{StaticResource Banner_Color01Brush}"
 												   FontSize="12" />
                                     </Grid>
@@ -401,7 +401,7 @@
 														  Margin="0,24,0,0" />
 
                                                         <!-- Interpreter Warning Content -->
-                                                        <TextBlock Visibility="{TemplateBinding InterpreterModeWarningVisibility}" 
+                                                        <TextBlock Visibility="{Binding InterpreterModeWarningVisibility, RelativeSource={RelativeSource TemplatedParent}}" 
 												   TextWrapping="Wrap"
 												   Foreground="{StaticResource Banner_Color02Brush}"
 												   FontStyle="Italic"
@@ -423,7 +423,7 @@
                                                         </TextBlock>
 
                                                         <!-- Version -->
-                                                        <TextBlock Text="{TemplateBinding VersionNumber}"
+                                                        <TextBlock Text="{Binding VersionNumber, RelativeSource={RelativeSource TemplatedParent}}"
 												   Foreground="{StaticResource Banner_Color02Brush}"
 												   FontSize="12"
 												   Margin="0,16,0,0">
