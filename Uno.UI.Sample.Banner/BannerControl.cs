@@ -6,12 +6,80 @@ using Windows.UI.Xaml.Markup;
 
 namespace Uno.UI.Sample.Banner
 {
+
+	public enum AppRuntimeMode
+	{
+		Interpreted,
+		Mixed,
+		AOT
+	}
+
 	[ContentProperty(Name = "AppContent")]
 	public partial class BannerControl : Control
 	{
+		private static AppRuntimeMode? _AppEnvironmentMode;
+
+		private static string _applicationName;
+		private static string _applicationCompany;
+		private static string _applicationVersion;
+
+		static BannerControl()
+		{
+#if __WASM__
+			var runtimeMode = Environment.GetEnvironmentVariable("UNO_BOOTSTRAP_MONO_RUNTIME_MODE");
+
+			if (runtimeMode.Equals("Interpreter", StringComparison.InvariantCultureIgnoreCase))
+			{
+				_AppEnvironmentMode = AppRuntimeMode.Interpreted;
+			}
+			else if (runtimeMode.Equals("FullAOT", StringComparison.InvariantCultureIgnoreCase))
+			{
+				_AppEnvironmentMode = AppRuntimeMode.AOT;
+			}
+			else if (runtimeMode.Equals("InterpreterAndAOT", StringComparison.InvariantCultureIgnoreCase))
+			{
+				_AppEnvironmentMode = AppRuntimeMode.Mixed;
+			}
+#endif
+			SetApplicationNameAndVersion();
+		}
+
+		private static void SetApplicationNameAndVersion()
+		{
+			var application = Application.Current;
+			var assembly = application.GetType().GetTypeInfo().Assembly;
+			var n = assembly.FullName;
+
+			if (assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>() is AssemblyInformationalVersionAttribute aiva)
+			{
+				_applicationVersion = aiva.InformationalVersion;
+			}
+			else if (assembly.GetCustomAttribute<AssemblyVersionAttribute>() is AssemblyVersionAttribute ava)
+			{
+				_applicationVersion = ava.Version;
+			}
+			else
+			{
+				_applicationVersion = "Unkown";
+			}
+
+			if(assembly.GetCustomAttribute<AssemblyProductAttribute>() is AssemblyProductAttribute apa)
+			{
+				_applicationName = apa.Product;
+			}
+
+			if(assembly.GetCustomAttribute<AssemblyCompanyAttribute>() is AssemblyCompanyAttribute aca)
+			{
+				_applicationCompany = aca.Company;
+			}
+		}
+
+
 		public BannerControl()
 		{
 			DefaultStyleKey = typeof(BannerControl);
+			AppName = _applicationName;
+			AppAuthor = _applicationCompany;
 		}
 
 		protected override void OnApplyTemplate()
@@ -51,10 +119,17 @@ namespace Uno.UI.Sample.Banner
 
 		private const string NvAssets = "https://nv-assets.azurewebsites.net/app-banner-assets/";
 
-		public string LogoGithub { get; set; } = NvAssets + "logo-github.png";
-		public string LogoTwitter { get; set; } = NvAssets + "logo-twitter.png";
-		public string LogoUno { get; set; } = NvAssets + "logo-uno.png";
-		public string LogoUnoSmall { get; set; } = NvAssets + "logo-uno-small.png";
+		private string GetImageQuery()
+		{
+			return "?a=" + Uri.EscapeDataString(AppName) +
+				"m=" + _AppEnvironmentMode +
+				"&v=" + Uri.EscapeDataString(VersionNumber);
+		}
+
+		public string LogoGithub => NvAssets + "logo-github.png";
+		public string LogoTwitter => NvAssets + "logo-twitter.png";
+		public string LogoUno => NvAssets + "logo-uno.png" + GetImageQuery();
+		public string LogoUnoSmall => NvAssets + "logo-uno-small.png" + GetImageQuery();
 
 		public static readonly DependencyProperty AppNameProperty =
 			DependencyProperty.Register("AppName", typeof(string), typeof(BannerControl), new PropertyMetadata(null));
@@ -66,14 +141,6 @@ namespace Uno.UI.Sample.Banner
 			DependencyProperty.Register("LinkToAppAuthor", typeof(string), typeof(BannerControl), new PropertyMetadata(null));
 		public static readonly DependencyProperty LinkToUnoPlatformAppProperty =
 			DependencyProperty.Register("LinkToUnoPlatformApp", typeof(string), typeof(BannerControl), new PropertyMetadata(null));
-		public static readonly DependencyProperty AppEnvironmentModeProperty =
-			DependencyProperty.Register("AppEnvironmentMode", typeof(string), typeof(BannerControl), new PropertyMetadata(null, OnAppEnvironmentModeChanged));
-		public static readonly DependencyProperty AppEnvironmentModeVisibilityProperty =
-			DependencyProperty.Register("AppEnvironmentModeVisibility", typeof(Visibility), typeof(BannerControl), new PropertyMetadata(Visibility.Collapsed));
-		public static readonly DependencyProperty InterpreterModeWarningVisibilityProperty =
-			DependencyProperty.Register("InterpreterModeWarningVisibility", typeof(Visibility), typeof(BannerControl), new PropertyMetadata(Visibility.Collapsed));
-		public static readonly DependencyProperty VersionNumberProperty =
-			DependencyProperty.Register("VersionNumber", typeof(string), typeof(BannerControl), new PropertyMetadata(GetApplicationVersion()));
 		public static readonly DependencyProperty AboutContentProperty =
 			DependencyProperty.Register("AboutContent", typeof(object), typeof(BannerControl), new PropertyMetadata(null));
 		public static readonly DependencyProperty AppContentProperty =
@@ -109,29 +176,13 @@ namespace Uno.UI.Sample.Banner
 			set => SetValue(LinkToUnoPlatformAppProperty, value);
 		}
 
-		public string AppEnvironmentMode
-		{
-			get => (string)GetValue(AppEnvironmentModeProperty);
-			set => SetValue(AppEnvironmentModeProperty, value);
-		}
+		public string AppEnvironmentMode => _AppEnvironmentMode.ToString();
+		 
+		public bool AppEnvironmentModeVisibility => _AppEnvironmentMode.HasValue;
 
-		public Visibility AppEnvironmentModeVisibility
-		{
-			get => (Visibility)GetValue(AppEnvironmentModeVisibilityProperty);
-			set => SetValue(AppEnvironmentModeVisibilityProperty, value);
-		}
+		public bool InterpreterModeWarningVisibility => _AppEnvironmentMode == AppRuntimeMode.Interpreted;
 
-		public Visibility InterpreterModeWarningVisibility
-		{
-			get => (Visibility)GetValue(InterpreterModeWarningVisibilityProperty);
-			set => SetValue(InterpreterModeWarningVisibilityProperty, value);
-		}
-
-		public string VersionNumber
-		{
-			get => (string)GetValue(VersionNumberProperty);
-			set => SetValue(VersionNumberProperty, value);
-		}
+		public string VersionNumber => _applicationVersion;
 
 		public object AboutContent
 		{
@@ -143,36 +194,6 @@ namespace Uno.UI.Sample.Banner
 		{
 			get => (object)GetValue(AppContentProperty);
 			set => SetValue(AppContentProperty, value);
-		}
-
-		private static void OnAppEnvironmentModeChanged(object d, DependencyPropertyChangedEventArgs e)
-		{
-			if (d is BannerControl banner)
-			{
-				var newValue = e.NewValue as string;
-				var isInterpreted = "Interpreted".Equals(newValue, StringComparison.OrdinalIgnoreCase);
-
-				banner.AppEnvironmentModeVisibility = string.IsNullOrEmpty(newValue) ? Visibility.Collapsed : Visibility.Visible;
-				banner.InterpreterModeWarningVisibility = isInterpreted ? Visibility.Visible : Visibility.Collapsed;
-			}
-		}
-
-		private static string GetApplicationVersion()
-		{
-			var application = Application.Current;
-			var assembly = application.GetType().GetTypeInfo().Assembly;
-
-			if (assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>() is AssemblyInformationalVersionAttribute aiva)
-			{
-				return aiva.InformationalVersion;
-			}
-
-			if (assembly.GetCustomAttribute<AssemblyVersionAttribute>() is AssemblyVersionAttribute ava)
-			{
-				return ava.Version;
-			}
-
-			return "Unkown";
 		}
 	}
 }
