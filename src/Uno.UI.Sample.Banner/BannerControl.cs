@@ -2,6 +2,7 @@
 using System.Reflection;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Markup;
 
 namespace Uno.UI.Sample.Banner
@@ -95,10 +96,16 @@ namespace Uno.UI.Sample.Banner
 
 			// LinkToAppAuthor is not used!
 
-			if(GetTemplateChild("closeAboutButton") is Button closeAboutButton
-				&& GetTemplateChild("aboutPopup") is Flyout aboutPopup)
+			Windows.UI.Xaml.Controls.Primitives.Popup aboutPopup = GetTemplateChild("AboutPopup") as Windows.UI.Xaml.Controls.Primitives.Popup;
+
+			if (GetTemplateChild("CloseAboutButton") is Button closeAboutButton)
 			{
-				closeAboutButton.Tapped += (snd, evt) => aboutPopup.Hide();
+				closeAboutButton.Tapped += (snd, evt) => aboutPopup.IsOpen = false;
+			}
+
+			if (GetTemplateChild("AboutButton") is Button aboutButton)
+			{
+				aboutButton.Tapped += (snd, evt) => aboutPopup.IsOpen = true;
 			}
 		}
 
