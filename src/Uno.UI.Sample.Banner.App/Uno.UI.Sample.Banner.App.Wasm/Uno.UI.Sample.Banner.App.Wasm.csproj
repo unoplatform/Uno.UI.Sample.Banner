@@ -30,9 +30,9 @@
     <Content Include="LinkerConfig.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Uno.UI" Version="1.44.0-dev.1053" />
-    <PackageReference Include="Uno.Wasm.Bootstrap" Version="1.0.0-dev.223" />
-    <DotNetCliToolReference Include="Uno.Wasm.Bootstrap.Cli" Version="1.0.0-dev.137" />
+    <PackageReference Include="Uno.UI" Version="1.45.0-dev.1338" />
+    <PackageReference Include="Uno.Wasm.Bootstrap" Version="1.0.0-dev.260" />
+    <DotNetCliToolReference Include="Uno.Wasm.Bootstrap.Cli" Version="1.0.0-dev.260" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Uno.UI.Sample.Banner\Uno.UI.Sample.Banner.csproj" />
