@@ -13,7 +13,7 @@
         LinkToOriginalApp="https://www.google.com/search?q=original+app"
         LinkToAppAuthor="https://www.google.com/search?q=original+app+author"
         LinkToUnoPlatformApp="https://www.google.com/search?q=uno+app+fork+on+github"
-        AboutContent="This is the about content...">
+        AboutContent="This is the about content that should wrap on multiple lines...">
         <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <TextBlock Text="Hello, world !" Margin="20" FontSize="30" />
         </Grid>

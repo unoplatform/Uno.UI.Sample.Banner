@@ -401,6 +401,7 @@
 														<ContentPresenter x:Name="AboutContent"
 														  Foreground="{StaticResource Banner_Color02Brush}"
 														  Content="{TemplateBinding AboutContent}"
+                                                          TextWrapping="Wrap" 
 														  Margin="0,24,0,0" />
 
 														<!-- Interpreter Warning Content -->
@@ -429,7 +430,8 @@
 														<TextBlock Text="{Binding VersionNumber, RelativeSource={RelativeSource TemplatedParent}}"
 												   Foreground="{StaticResource Banner_Color02Brush}"
 												   FontSize="12"
-												   Margin="0,16,0,0">
+                                                   TextWrapping="Wrap" TextTrimming="CharacterEllipsis"
+												   Margin="0,16,0,16">
 
 														</TextBlock>
 													</StackPanel>
