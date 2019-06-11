@@ -8,6 +8,8 @@
     mc:Ignorable="d">
 
     <banner:BannerControl
+        AppName="My App Name"
+        AppAuthor="My App Author"
         LinkToOriginalApp="https://www.google.com/search?q=original+app"
         LinkToAppAuthor="https://www.google.com/search?q=original+app+author"
         LinkToUnoPlatformApp="https://www.google.com/search?q=uno+app+fork+on+github"
