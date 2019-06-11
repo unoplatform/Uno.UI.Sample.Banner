@@ -50,7 +50,10 @@ namespace Uno.UI.Sample.Banner
 			var assembly = application.GetType().GetTypeInfo().Assembly;
 			var n = assembly.FullName;
 
-			if (assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>() is AssemblyInformationalVersionAttribute aiva)
+#if DEBUG
+            _applicationVersion = "1.0.0.dev.4+abcdabcdbacdbacdbacdabacadcadbacadcadbc";
+#else
+            if (assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>() is AssemblyInformationalVersionAttribute aiva)
 			{
 				_applicationVersion = aiva.InformationalVersion;
 			}
@@ -62,6 +65,7 @@ namespace Uno.UI.Sample.Banner
 			{
 				_applicationVersion = "Unkown";
 			}
+#endif
 
 			if(assembly.GetCustomAttribute<AssemblyProductAttribute>() is AssemblyProductAttribute apa)
 			{

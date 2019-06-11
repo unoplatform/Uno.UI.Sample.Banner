@@ -175,23 +175,15 @@
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup>
 
-								<VisualState x:Name="narrow">
+								<VisualState x:Name="wide">
 									<VisualState.StateTriggers>
-										<AdaptiveTrigger MinWindowWidth="0" />
+										<AdaptiveTrigger MinWindowWidth="700" />
 									</VisualState.StateTriggers>
 									<VisualState.Setters>
-										<Setter Target="AppNameTitle.FontSize"
-												Value="14" />
-										<Setter Target="AppAuthorTitle_1.FontSize"
-												Value="14" />
-										<Setter Target="AppAuthorTitle_2.FontSize"
-												Value="14" />
-										<Setter Target="RegularUnoPlatformLogo.Visibility"
-												Value="Collapsed" />
-										<Setter Target="SmallUnoPlatformLogo.Visibility"
-												Value="Visible" />
-									</VisualState.Setters>
-								</VisualState>
+										<Setter Target="AppInfo.Orientation"
+												Value="Horizontal" />
+                                    </VisualState.Setters>
+                                </VisualState>
 
 								<VisualState x:Name="medium">
 									<VisualState.StateTriggers>
@@ -210,19 +202,28 @@
 												Value="Collapsed" />
 										<Setter Target="AppInfo.Orientation"
 												Value="Vertical" />
-									</VisualState.Setters>
+                                    </VisualState.Setters>
 								</VisualState>
+                                
+                                <VisualState x:Name="narrow">
+                                    <VisualState.StateTriggers>
+                                        <AdaptiveTrigger MinWindowWidth="0" />
+                                    </VisualState.StateTriggers>
+                                    <VisualState.Setters>
+                                        <Setter Target="AppNameTitle.FontSize"
+												Value="14" />
+                                        <Setter Target="AppAuthorTitle_1.FontSize"
+												Value="14" />
+                                        <Setter Target="AppAuthorTitle_2.FontSize"
+												Value="14" />
+                                        <Setter Target="RegularUnoPlatformLogo.Visibility"
+												Value="Collapsed" />
+                                        <Setter Target="SmallUnoPlatformLogo.Visibility"
+												Value="Visible" />
+                                    </VisualState.Setters>
+                                </VisualState>
 
-								<VisualState x:Name="wide">
-									<VisualState.StateTriggers>
-										<AdaptiveTrigger MinWindowWidth="700" />
-									</VisualState.StateTriggers>
-									<VisualState.Setters>
-										<Setter Target="AppInfo.Orientation"
-												Value="Horizontal" />
-									</VisualState.Setters>
-								</VisualState>
-							</VisualStateGroup>
+                            </VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
 						<Grid>
@@ -272,7 +273,8 @@
 									<StackPanel x:Name="AppInfo">
 
 										<!-- App Button  -->
-										<Button x:Name="appButton"
+                                        <Button x:Name="appButton"
+                                                HorizontalAlignment="Left"
 												Style="{StaticResource Banner_BasicEmptyButtonStyle}"
 												Margin="0,0,4,0">
 
@@ -287,7 +289,8 @@
 										</Button>
 
 										<!-- Author Button  -->
-										<Button x:Name="authorButton"
+                                        <Button x:Name="authorButton"
+                                                HorizontalAlignment="Left"
 												Style="{StaticResource Banner_BasicEmptyButtonStyle}">
 
 											<StackPanel Orientation="Horizontal">
@@ -398,6 +401,7 @@
 														<ContentPresenter x:Name="AboutContent"
 														  Foreground="{StaticResource Banner_Color02Brush}"
 														  Content="{TemplateBinding AboutContent}"
+                                                          TextWrapping="Wrap" 
 														  Margin="0,24,0,0" />
 
 														<!-- Interpreter Warning Content -->
@@ -426,7 +430,8 @@
 														<TextBlock Text="{Binding VersionNumber, RelativeSource={RelativeSource TemplatedParent}}"
 												   Foreground="{StaticResource Banner_Color02Brush}"
 												   FontSize="12"
-												   Margin="0,16,0,0">
+                                                   TextWrapping="Wrap" TextTrimming="CharacterEllipsis"
+												   Margin="0,16,0,16">
 
 														</TextBlock>
 													</StackPanel>
