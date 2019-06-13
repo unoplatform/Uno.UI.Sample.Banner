@@ -175,17 +175,29 @@
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup>
 
-								<VisualState x:Name="wide">
-									<VisualState.StateTriggers>
-										<AdaptiveTrigger MinWindowWidth="700" />
-									</VisualState.StateTriggers>
-									<VisualState.Setters>
-										<Setter Target="AppInfo.Orientation"
+                                <VisualState x:Name="wide">
+                                    <VisualState.StateTriggers>
+                                        <AdaptiveTrigger MinWindowWidth="900" />
+                                    </VisualState.StateTriggers>
+                                    <VisualState.Setters>
+                                        <Setter Target="AppInfo.Orientation"
 												Value="Horizontal" />
                                     </VisualState.Setters>
                                 </VisualState>
 
-								<VisualState x:Name="medium">
+                                <VisualState x:Name="wideNoPromo">
+                                    <VisualState.StateTriggers>
+                                        <AdaptiveTrigger MinWindowWidth="700" />
+                                    </VisualState.StateTriggers>
+                                    <VisualState.Setters>
+                                        <Setter Target="AppInfo.Orientation"
+												Value="Horizontal" />
+                                        <Setter Target="promoBlock.Visibility"
+												Value="Collapsed" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                
+                                <VisualState x:Name="medium">
 									<VisualState.StateTriggers>
 										<AdaptiveTrigger MinWindowWidth="600" />
 									</VisualState.StateTriggers>
@@ -202,6 +214,8 @@
 												Value="Collapsed" />
 										<Setter Target="AppInfo.Orientation"
 												Value="Vertical" />
+                                        <Setter Target="promoBlock.Visibility"
+												Value="Collapsed" />
                                     </VisualState.Setters>
 								</VisualState>
                                 
@@ -220,6 +234,8 @@
 												Value="Collapsed" />
                                         <Setter Target="SmallUnoPlatformLogo.Visibility"
 												Value="Visible" />
+                                        <Setter Target="promoBlock.Visibility"
+												Value="Collapsed" />
                                     </VisualState.Setters>
                                 </VisualState>
 
@@ -238,8 +254,9 @@
 								  Grid.Row="0">
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="Auto" />
-									<ColumnDefinition Width="*" />
-									<ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
 								</Grid.ColumnDefinitions>
 
 								<!-- Uno Button -->
@@ -326,10 +343,27 @@
 									</Grid>
 								</StackPanel>
 
+                                <Grid x:Name="promoBlock" Grid.Column="2" Margin="12">
+                                    <TextBlock
+											VerticalAlignment="Center" 
+                                            TextAlignment="Center"
+                                            TextWrapping="WrapWholeWords"
+											Foreground="{StaticResource Banner_Color02Brush}"
+											FontSize="12">
+                                        <Run Text="The"/>
+                                        <Run FontWeight="Bold" Text="{Binding AppName, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                        <Run Text="is developed with Uno Platform (Apache 2.0)" />
+                                        <LineBreak />
+                                        <Run Text="With Uno you can create single-codebase apps for Mobile, Desktop and WebAssembly using only C# and XAML." />
+                                        <LineBreak />
+                                        <Hyperlink NavigateUri="https://platform.uno/docs/articles/getting-started-tutorial-1.html" Foreground="White">Try Uno Platform</Hyperlink>
+                                    </TextBlock>
+                                </Grid>
+
 								<StackPanel Orientation="Horizontal"
 											VerticalAlignment="Center"
 											Margin="0,0,16,0"
-											Grid.Column="2">
+											Grid.Column="3">
 
 									<!-- About Button -->
 									<Button x:Name="aboutButton"
@@ -376,7 +410,7 @@
 					
 											Welcome to
 											
-											<!-- Link to Original Fork -->
+											<!-- Link to Uno Fork -->
 											<Hyperlink NavigateUri="{TemplateBinding LinkToUnoPlatformApp}"
 													   Foreground="{StaticResource Banner_Color02Brush}">
 												<Underline>
@@ -386,7 +420,7 @@
 					
 											by
 											
-											<!-- Link to Uno Fork -->
+											<!-- Link to Original Fork -->
 											<Hyperlink NavigateUri="{TemplateBinding LinkToOriginalApp}"
 													   Foreground="{StaticResource Banner_Color02Brush}">
 												<Underline>
@@ -404,7 +438,22 @@
                                                           TextWrapping="Wrap" 
 														  Margin="0,24,0,0" />
 
-														<!-- Interpreter Warning Content -->
+                                                        <TextBlock 
+														  Margin="0,16,0,0"
+                                                            TextWrapping="WrapWholeWords"
+											                Foreground="{StaticResource Banner_Color02Brush}"
+											                FontSize="12">
+                                                            <Run Text="The"/>
+                                                            <Run FontWeight="Bold" Text="{Binding AppName, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                                            <Run Text="is developed with Uno Platform (Apache 2.0)." />
+                                                            <Run Text="With Uno you can create single-codebase apps for Mobile, Desktop and WebAssembly using only C# and XAML." />
+                                                            <LineBreak />
+                                                            <LineBreak />
+                                                            <Hyperlink NavigateUri="https://platform.uno/docs/articles/getting-started-tutorial-1.html" Foreground="White">Try Uno Platform</Hyperlink>
+                                                        </TextBlock>
+
+
+                                                        <!-- Interpreter Warning Content -->
 														<TextBlock Visibility="{Binding InterpreterModeWarningVisibility, RelativeSource={RelativeSource TemplatedParent}}" 
 												   TextWrapping="Wrap"
 												   Foreground="{StaticResource Banner_Color02Brush}"
