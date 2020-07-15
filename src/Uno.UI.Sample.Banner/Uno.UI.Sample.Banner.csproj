@@ -1,16 +1,18 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="MSBuild.Sdk.Extras/2.0.24">
+﻿<Project Sdk="MSBuild.Sdk.Extras">
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;xamarinios10;monoandroid80;uap10.0.16299</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0;xamarinios10;monoandroid90;uap10.0.16299</TargetFrameworks>
 
 		<!-- Ensures the .xr.xml files are generated in a proper layout folder -->
 		<GenerateLibraryLayout>true</GenerateLibraryLayout>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<Deterministic>true</Deterministic>
 	</PropertyGroup>
 
 	<PropertyGroup>
 		<!-- Nuget Metadata -->
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
 		<Authors>nventive</Authors>
 		<Company>nventive</Company>
 		<Product>Uno Banner for Forked Projects</Product>
@@ -18,21 +20,26 @@
 			This package is used to add a standard banner giving information about Uno.
 			Used on projects forked by nventive to add Uno as target.
 		</Description>
+		<PackageIcon>uno.png</PackageIcon>
 		<PackageIconUrl>https://nv-assets.azurewebsites.net/logos/uno.png</PackageIconUrl>
 		<PackageProjectUrl>https://github.com/nventive/Uno.UI.Sample.Banner</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/nventive/Uno.UI.Sample.Banner.git</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<Copyright>Copyright (C) 2019 nventive inc. - all rights reserved</Copyright>
+		<Copyright>Copyright (C) 2019-2020 nventive inc. - all rights reserved</Copyright>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
 		<DefineConstants>$(DefineConstants);__WASM__</DefineConstants>
 	</PropertyGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)'=='xamarinios10' or '$(TargetFramework)'=='monoandroid80' or '$(TargetFramework)'=='netstandard2.0'">
-		<PackageReference Include="Uno.UI" Version="1.45.0-dev.1338">
+	<ItemGroup>
+		<PackageReference Include="Uno.UI" Version="3.0.0-dev.783">
 			<NoWarn>NU1701</NoWarn>
 		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\uno.png" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 	<ItemGroup>

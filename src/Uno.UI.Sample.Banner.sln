@@ -21,6 +21,7 @@ Global
 		Uno.UI.Sample.Banner.App\Uno.UI.Sample.Banner.App.Shared\Uno.UI.Sample.Banner.App.Shared.projitems*{53ad22b1-4b97-43e7-8337-5b28c9d06f44}*SharedItemsImports = 4
 		Uno.UI.Sample.Banner.App\Uno.UI.Sample.Banner.App.Shared\Uno.UI.Sample.Banner.App.Shared.projitems*{6279c845-92f8-4333-ab99-3d213163593c}*SharedItemsImports = 13
 		Uno.UI.Sample.Banner.App\Uno.UI.Sample.Banner.App.Shared\Uno.UI.Sample.Banner.App.Shared.projitems*{8866fc6a-b026-4710-acdb-6238445a6e4c}*SharedItemsImports = 4
+		Uno.UI.Sample.Banner.App\Uno.UI.Sample.Banner.App.Shared\Uno.UI.Sample.Banner.App.Shared.projitems*{991b8192-b598-498a-9746-60196287fa90}*SharedItemsImports = 5
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU

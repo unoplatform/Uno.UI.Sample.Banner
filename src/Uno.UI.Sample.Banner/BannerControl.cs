@@ -17,7 +17,7 @@ namespace Uno.UI.Sample.Banner
 	[ContentProperty(Name = "AppContent")]
 	public partial class BannerControl : Control
 	{
-		private static AppRuntimeMode? _AppEnvironmentMode;
+		private static AppRuntimeMode? _AppEnvironmentMode = null;
 
 		private static string _applicationName;
 		private static string _applicationCompany;
@@ -116,7 +116,7 @@ namespace Uno.UI.Sample.Banner
 				}
 				else
 				{
-					button.Tapped += (snd, evt) => Windows.System.Launcher.LaunchUriAsync(new Uri(url));
+					button.Tapped += (snd, evt) => _ = Windows.System.Launcher.LaunchUriAsync(new Uri(url));
 				}
 			}
 		}
