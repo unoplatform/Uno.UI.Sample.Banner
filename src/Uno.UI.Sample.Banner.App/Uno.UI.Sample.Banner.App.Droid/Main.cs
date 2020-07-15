@@ -1,14 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
 using Android.Content;
-using Android.OS;
 using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Com.Nostra13.Universalimageloader.Core;
 using Windows.UI.Xaml.Media;
 
@@ -23,7 +15,7 @@ namespace Uno.UI.Sample.Banner.App.Droid
 	public class Application : Windows.UI.Xaml.NativeApplication
 	{
 		public Application(IntPtr javaReference, JniHandleOwnership transfer)
-			: base(new App(), javaReference, transfer)
+			: base(()=> new App(), javaReference, transfer)
 		{
 			ConfigureUniversalImageLoader();
 		}
