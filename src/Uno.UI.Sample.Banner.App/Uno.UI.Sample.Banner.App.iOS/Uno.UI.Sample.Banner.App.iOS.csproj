@@ -115,8 +115,8 @@
     <BundleResource Include="Resources\Fonts\winjs-symbols.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Uno.UI" Version="3.0.0-dev.783" />
-    <PackageReference Include="Uno.UI.RemoteControl" Version="3.0.0-dev.783" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI" Version="3.0.0-dev.840" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="3.0.0-dev.840" Condition="'$(Configuration)'=='Debug'" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Contents.json">
