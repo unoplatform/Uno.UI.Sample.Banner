@@ -25,22 +25,24 @@ namespace Uno.UI.Sample.Banner
 
 		static BannerControl()
 		{
-#if __WASM__
 			var runtimeMode = Environment.GetEnvironmentVariable("UNO_BOOTSTRAP_MONO_RUNTIME_MODE");
 
-			if (runtimeMode.Equals("Interpreter", StringComparison.InvariantCultureIgnoreCase))
-			{
-				_AppEnvironmentMode = AppRuntimeMode.Interpreted;
+			if (!string.IsNullOrEmpty(runtimeMode))
+			{ 
+				if (runtimeMode.Equals("Interpreter", StringComparison.InvariantCultureIgnoreCase))
+				{
+					_AppEnvironmentMode = AppRuntimeMode.Interpreted;
+				}
+				else if (runtimeMode.Equals("FullAOT", StringComparison.InvariantCultureIgnoreCase))
+				{
+					_AppEnvironmentMode = AppRuntimeMode.AOT;
+				}
+				else if (runtimeMode.Equals("InterpreterAndAOT", StringComparison.InvariantCultureIgnoreCase))
+				{
+					_AppEnvironmentMode = AppRuntimeMode.Mixed;
+				}
 			}
-			else if (runtimeMode.Equals("FullAOT", StringComparison.InvariantCultureIgnoreCase))
-			{
-				_AppEnvironmentMode = AppRuntimeMode.AOT;
-			}
-			else if (runtimeMode.Equals("InterpreterAndAOT", StringComparison.InvariantCultureIgnoreCase))
-			{
-				_AppEnvironmentMode = AppRuntimeMode.Mixed;
-			}
-#endif
+
 			SetApplicationNameAndVersion();
 		}
 
