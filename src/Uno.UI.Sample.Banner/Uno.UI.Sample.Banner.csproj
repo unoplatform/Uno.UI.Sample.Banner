@@ -1,14 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="MSBuild.Sdk.Extras">
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;xamarinios10;monoandroid90;monoandroid10.0;uap10.0.16299</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0;xamarinios10;monoandroid11.0;monoandroid10.0;uap10.0.18362</TargetFrameworks>
 
 		<!-- Ensures the .xr.xml files are generated in a proper layout folder -->
 		<GenerateLibraryLayout>true</GenerateLibraryLayout>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
 		<ProduceReferenceAssembly>true</ProduceReferenceAssembly>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<Deterministic>true</Deterministic>
+		<NoWarn>$(NoWarn);Uno0001;NU5104</NoWarn>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -34,7 +35,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Uno.UI" Version="3.0.0-dev.899">
+		<PackageReference Include="Uno.UI" Version="4.0.0-dev.5407">
 			<NoWarn>NU1701</NoWarn>
 		</PackageReference>
 	</ItemGroup>
