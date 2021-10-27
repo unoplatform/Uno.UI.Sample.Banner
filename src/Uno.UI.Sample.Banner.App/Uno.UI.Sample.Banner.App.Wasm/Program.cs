@@ -15,3 +15,4 @@ namespace Uno.UI.Sample.Banner.App.Wasm
 		}
 	}
 }
+
