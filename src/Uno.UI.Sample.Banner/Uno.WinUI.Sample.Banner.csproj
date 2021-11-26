@@ -21,4 +21,5 @@
 	</ItemGroup>
 	
 	<Import Project="common.props"/>
+	<Import Project="..\winappsdk-workaround.targets"/>
 </Project>
