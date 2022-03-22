@@ -29,10 +29,10 @@
   </ItemGroup>
   <ItemGroup>
  		<PackageReference Include="Microsoft.Windows.Compatibility" Version="5.0.0" />
-    <PackageReference Include="Uno.UI.WebAssembly" Version="4.0.0-dev.5594" />
-		<PackageReference Include="Uno.UI.RemoteControl" Version="4.0.0-dev.5594" />
-		<PackageReference Include="Uno.Wasm.Bootstrap" Version="3.0.0" />
-		<PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="3.0.0" />
+    <PackageReference Include="Uno.UI.WebAssembly" Version="4.1.9" />
+		<PackageReference Include="Uno.UI.RemoteControl" Version="4.1.9" />
+		<PackageReference Include="Uno.Wasm.Bootstrap" Version="3.3.1" />
+		<PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="3.3.1" />
 	</ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Uno.UI.Sample.Banner\Uno.UI.Sample.Banner.csproj" />
