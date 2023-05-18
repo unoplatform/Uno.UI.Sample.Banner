@@ -11,19 +11,19 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<Authors>nventive</Authors>
-		<Company>nventive</Company>
+		<Authors>unoplatform</Authors>
+		<Company>unoplatform</Company>
 		<Product>Uno Banner for Forked Projects</Product>
 		<Description>
 			This package is used to add a standard banner giving information about Uno.
 			Used on projects forked by nventive to add Uno as target.
 		</Description>
 		<PackageIcon>uno.png</PackageIcon>
-		<PackageIconUrl>https://nv-assets.azurewebsites.net/logos/uno.png</PackageIconUrl>
-		<PackageProjectUrl>https://github.com/nventive/Uno.UI.Sample.Banner</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/nventive/Uno.UI.Sample.Banner.git</RepositoryUrl>
+		<PackageIconUrl>https://uno-assets.platform.uno/logos/uno.png</PackageIconUrl>
+		<PackageProjectUrl>https://github.com/unoplatform/Uno.UI.Sample.Banner</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/unoplatform/Uno.UI.Sample.Banner.git</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<Copyright>Copyright (C) 2019-2020 nventive inc. - all rights reserved</Copyright>
+		<Copyright>Copyright (C) 2019-2023 unoplatform inc. - all rights reserved</Copyright>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">

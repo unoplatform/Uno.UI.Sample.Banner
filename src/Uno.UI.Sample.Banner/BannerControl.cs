@@ -130,7 +130,7 @@ namespace Uno.UI.Sample.Banner
 			}
 		}
 
-		private const string NvAssets = "https://nv-assets.azurewebsites.net/app-banner-assets/";
+		private const string NvAssets = "https://uno-assets.platform.uno/app-banner-assets/";
 
 		private string GetImageQuery()
 		{
