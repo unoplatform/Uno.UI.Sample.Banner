@@ -7,6 +7,8 @@
 		<BaseOutputPath>bin\$(MSBuildProjectName)</BaseOutputPath>
 		<BaseIntermediateOutputPath>obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
 		<DefaultItemExcludes>$(DefaultItemExcludes);obj/**;bin/**</DefaultItemExcludes>
+
+		<UnoUIUseRoslynSourceGenerators>true</UnoUIUseRoslynSourceGenerators>
 	</PropertyGroup>
 
 </Project>
