@@ -6,7 +6,7 @@
 		<EnableDefaultPageItems>false</EnableDefaultPageItems>
 	</PropertyGroup>
 
-	<ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'">
 		<PackageReference Include="Uno.WinUI" Version="4.6.44">
 			<NoWarn>NU1701</NoWarn>
 		</PackageReference>
