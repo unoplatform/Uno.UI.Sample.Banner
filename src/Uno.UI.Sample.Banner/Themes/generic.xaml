@@ -367,8 +367,7 @@
 
 									<!-- About Button -->
 									<Button x:Name="aboutButton"
-											Style="{StaticResource Banner_BasicEmptyButtonStyle}"
-											Click="OnAbout">
+											Style="{StaticResource Banner_BasicEmptyButtonStyle}">
 										<TextBlock Text="i"
 												   Foreground="{StaticResource Banner_Color03Brush}"
 												   FontSize="28"
@@ -386,7 +385,6 @@
 													<!-- Close Button -->
 													<Button x:Name="closeAboutButton"
 															Style="{StaticResource Banner_BasicEmptyButtonStyle}"
-															Click="OnCloseAbout"
 															VerticalAlignment="Top"
 															HorizontalAlignment="Right"
 															Padding="0">
@@ -488,7 +486,6 @@
 													<!-- Uno website Button -->
 													<Button x:Name="visitUnoWebsiteButton"
 											Style="{StaticResource Banner_BasicEmptyButtonStyle}"
-											Click="OnVisitUnoPlatformWebsite"
 											VerticalAlignment="Bottom"
 											HorizontalAlignment="Right"
 											Margin="0,0,16,26"
