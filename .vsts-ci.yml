@@ -11,11 +11,6 @@ jobs:
   - task: GitVersion@4
     inputs:
       updateAssemblyInfo: false   
-      
-  - task: NuGetToolInstaller@0
-    inputs:
-        versionSpec: 4.9.1
-        checkLatest: false
 
   # This SDK version is needed as long as `uap10.0` will be supported in Uno.Core
   - powershell: .\build\Install-WindowsSdkISO.ps1 18362
